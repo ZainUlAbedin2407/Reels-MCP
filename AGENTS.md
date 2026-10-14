@@ -7,10 +7,7 @@ Build a minimal MCP server in TypeScript (Node.js, official MCP SDK, stdio trans
 - Node.js, TypeScript, `@modelcontextprotocol/sdk`, stdio transport
 
 ## Commands
-- Install: `npm install`
-- Build: `npm run build`
-- Run: `npm start`
-- Test: `npm test`
+- Install: `npm install` | Build: `npm run build` | Run: `npm start` | Test: `npm test`
 
 ## Conventions
 - Small, single-purpose functions
@@ -18,4 +15,6 @@ Build a minimal MCP server in TypeScript (Node.js, official MCP SDK, stdio trans
 - No secrets or sensitive data in code
 
 ## Workflow Rule
-Before any work, read docs/PLAN.md. After each task, update docs/PLAN.md and docs/PROGRESS.md.
+- Before any work, read docs/PLAN.md. After each task, update docs/PLAN.md and docs/PROGRESS.md.
+- Do one task at a time, then stop.
+- Stay inside this project folder. Ask before installing any dependency not listed in the plan.
