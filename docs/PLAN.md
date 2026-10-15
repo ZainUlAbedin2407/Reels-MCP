@@ -8,7 +8,7 @@ A checklist of tasks to implement the minimal MCP server.
 - [x] 2. Load and parse CSV
   - Requirements: The CSV parser must handle quoted fields containing commas (e.g. `"Rates itne neeche, sourcing itni oonchi"`), empty likes values (treat as null), and a possible BOM at the start of the file.
   - Done when: A test covers these three cases using real rows from `zeetech_reels.csv` and records are parsed into typed objects with numeric `views`.
-- [ ] 3. Tool function plus a unit test
+- [x] 3. Tool function plus a unit test
   - Requirements: `getTopReels(limit)` must reject a limit below 1, cap the limit at the number of rows, and return title, views, style, and category for each reel sorted by views descending (default limit: 5).
   - Done when: Automated unit tests verify rejection of limit < 1, capping at total row count, field filtering (`title`, `views`, `style`, `category`), and correct sorting.
 - [ ] 4. MCP server wiring

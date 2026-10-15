@@ -1,7 +1,7 @@
 # Project Progress
 
 ## Current task
-Task 2 (Load and parse CSV) - Completed
+Task 3 (Tool function plus a unit test) - Completed
 
 ## Done
 - Created initial planning and configuration files (`AGENTS.md`, `docs/PLAN.md`, `docs/PROGRESS.md`, `.gitignore`, `.antigravityignore`).
@@ -12,19 +12,17 @@ Task 2 (Load and parse CSV) - Completed
   - Added minimal `src/index.ts` placeholder and verified build/start/test commands.
 - Task 2:
   - Created `src/types.ts` defining the `Reel` interface.
-  - Implemented standalone CSV parser in `src/csvParser.ts` without external CSV libraries:
-    - `stripBom`: strips leading UTF-8 BOM (`\uFEFF`).
-    - `parseCsvLine`: character-by-character parser handling quoted fields containing commas and escaped quotes (`""`).
-    - `parseCsv`: maps rows to `Reel` objects with numeric `views`/`reel_id` and empty likes as `null`.
-    - `getDefaultCsvPath`: resolves CSV path via `import.meta.url` (`new URL('../zeetech_reels.csv', import.meta.url)`).
-    - `loadReelsCsv`: reads and parses CSV from resolved path.
-  - Created test suite `src/csvParser.test.ts` testing:
-    - Quoted fields with commas using real row 15.
-    - Empty likes as `null` using real row 2 vs numeric likes in row 1.
-    - UTF-8 BOM prefix handling.
-    - Path resolution from outside working directory (tested via `os.tmpdir()`).
-    - Full parsing of all 18 rows from `zeetech_reels.csv`.
-  - Verified tests pass via `npm test` (5/5 tests passing).
+  - Implemented standalone CSV parser in `src/csvParser.ts` (BOM stripping, quotes/commas, null likes, url-based path resolution).
+  - Created test suite `src/csvParser.test.ts` with 5 passing tests.
+- Task 3:
+  - Added `TopReel` interface to `src/types.ts` containing only `title`, `views`, `style`, and `category`.
+  - Implemented `getTopReels` pure function in `src/reels.ts`:
+    - `validateLimit`: validates limit is a whole number >= 1, defaults `undefined` to 5, rejects strings, decimals, NaN, null, and non-positive numbers with a descriptive error.
+    - Caps effective limit at total row count.
+    - Pure sort by `views` descending, breaking ties by `reel_id` ascending without mutating the input array.
+    - Projects results to `TopReel` shape (`title`, `views`, `style`, `category`).
+  - Added unit test suite `src/reels.test.ts` covering validation, defaults, capping, descending sort, tie-breaking, field filtering, and array immutability.
+  - Ran `npm test` (all 14 tests in 2 suites passing cleanly).
 
 ## Decisions
 - Stack: TypeScript (Node.js) with `@modelcontextprotocol/sdk` over stdio transport.
@@ -32,12 +30,12 @@ Task 2 (Load and parse CSV) - Completed
 - Task 1: Before installing, list every dependency to add and why (keep to TypeScript, Node types, MCP SDK + essential requirements, and one test approach).
 - Task 2: CSV parser must handle quoted fields with commas, empty likes as null, and UTF-8 BOM, verified with tests on real rows from `zeetech_reels.csv`.
 - Task 2: Resolve CSV path relative to module (`import.meta.url`) instead of `process.cwd()`.
-- Task 3: `getTopReels` must reject limit < 1, cap limit at total rows, and return only `title`, `views`, `style`, `category` sorted by views.
+- Task 3: `getTopReels` is a pure function taking `(reels, limit)`, validates limit >= 1 integer (default 5), breaks ties by `reel_id` ascending, and returns only `title`, `views`, `style`, `category`.
 - Task 6: README config example must provide the absolute Windows path with backslashes correctly escaped in JSON.
 - Workflow: Do one task at a time, then stop. Stay inside project folder and ask before installing any dependency not listed in the plan.
 
 ## Known issues
-- What broke: None. All 5 test cases passed cleanly on first run.
+- What broke: None. All 9 new test cases passed cleanly on first run.
 
 ## Next step
-- Task 3: Tool function plus a unit test (`getTopReels(limit)` rejecting limit < 1, capping at total rows, and returning title, views, style, category).
+- Task 4: MCP server wiring (initialize MCP server with stdio transport, register `get_top_reels` tool with input schema validation, and return standard MCP response).

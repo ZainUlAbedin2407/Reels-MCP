@@ -7,3 +7,10 @@ export interface Reel {
   category: string;
   notes: string;
 }
+
+export interface TopReel {
+  title: string;
+  views: number;
+  style: string;
+  category: string;
+}
