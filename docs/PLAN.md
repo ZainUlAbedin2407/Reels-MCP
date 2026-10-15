@@ -2,7 +2,7 @@
 
 A checklist of tasks to implement the minimal MCP server.
 
-- [ ] 1. Init project
+- [x] 1. Init project
   - Requirements: Before installing, list every dependency to add and why. Keep it to TypeScript, Node types, the MCP SDK (and whatever it requires), and one test approach.
   - Done when: Dependencies are reviewed/approved, and `package.json` and `tsconfig.json` are set up with TypeScript, `@modelcontextprotocol/sdk`, dev tooling, and build/run/test scripts.
 - [ ] 2. Load and parse CSV
