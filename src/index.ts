@@ -58,6 +58,12 @@ export function createMcpServer(loader: () => Reel[] = loadReelsCsv): McpServer 
     {
       description: 'Returns the top Zee-Tech Instagram reels ranked by view count in JSON format.',
       inputSchema: getTopReelsInputSchema,
+      annotations: {
+        readOnlyHint: true,
+        destructiveHint: false,
+        idempotentHint: true,
+        openWorldHint: false,
+      },
     },
     async (args) => handleGetTopReels(args, loader)
   );

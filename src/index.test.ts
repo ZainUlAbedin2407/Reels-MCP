@@ -83,10 +83,28 @@ describe('MCP Server Tool Handler', () => {
     }
   });
 
-  it('creates McpServer instance with registered get_top_reels tool', () => {
+  it('creates McpServer instance with registered get_top_reels tool and correct annotations', () => {
     const server = createMcpServer(() => mockReels);
     assert.ok(server);
-    const registeredTools = (server as unknown as { _registeredTools: Record<string, unknown> })._registeredTools;
-    assert.ok(registeredTools['get_top_reels']);
+    const registeredTools = (server as unknown as {
+      _registeredTools: Record<string, {
+        description?: string;
+        annotations?: {
+          readOnlyHint?: boolean;
+          destructiveHint?: boolean;
+          idempotentHint?: boolean;
+          openWorldHint?: boolean;
+        };
+      }>;
+    })._registeredTools;
+
+    const tool = registeredTools['get_top_reels'];
+    assert.ok(tool);
+    assert.deepStrictEqual(tool.annotations, {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    });
   });
 });

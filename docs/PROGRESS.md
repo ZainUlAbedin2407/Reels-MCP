@@ -1,7 +1,7 @@
 # Project Progress
 
 ## Current task
-Task 4 (MCP server wiring) - Completed
+Task 5 (Manual test with the MCP inspector) - Completed
 
 ## Done
 - Created initial planning and configuration files (`AGENTS.md`, `docs/PLAN.md`, `docs/PROGRESS.md`, `.gitignore`, `.antigravityignore`).
@@ -29,6 +29,18 @@ Task 4 (MCP server wiring) - Completed
   - Added direct execution check (`isDirectExecution`) so modules and functions can be tested without starting the server.
   - Added unit tests in `src/index.test.ts` covering success case, invalid limit error response, loader failure error response, and server tool registration.
   - Ran `npm test` (all 18 tests in 3 suites passing).
+- Task 5:
+  - Manual Inspector test performed:
+    - `limit 3`: returned the 3 correct top reels (1445, 1000, 255), including the title with a quoted comma.
+    - `limit 0`: returned MCP error -32602 "Number must be greater than or equal to 1" from the schema validation, and the server stayed connected.
+    - Found: the Inspector showed wrong default tool annotations (Destructive true, Open-world true, Read-only false).
+  - Fixed tool annotations in `get_top_reels` registration in `src/index.ts`:
+    - `readOnlyHint`: `true`
+    - `destructiveHint`: `false`
+    - `idempotentHint`: `true`
+    - `openWorldHint`: `false`
+  - Updated test in `src/index.test.ts` to assert that registered tool annotations match these values.
+  - Verified with `npm test` (18 passing tests).
 
 ## Decisions
 - Stack: TypeScript (Node.js) with `@modelcontextprotocol/sdk` over stdio transport.
@@ -39,11 +51,12 @@ Task 4 (MCP server wiring) - Completed
 - Task 3: `getTopReels` is a pure function taking `(reels, limit)`, validates limit >= 1 integer (default 5), breaks ties by `reel_id` ascending, and returns only `title`, `views`, `style`, `category`.
 - Task 4: Use `McpServer.registerTool` from `@modelcontextprotocol/sdk/server/mcp.js` and `StdioServerTransport` from `@modelcontextprotocol/sdk/server/stdio.js`.
 - Task 4: Never write to `stdout` directly (use `console.error` for logging). Catch errors and return MCP standard `isError: true` tool responses.
+- Task 5: Explicitly define tool annotations (`readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false`) so clients correctly recognize safe, read-only tools.
 - Task 6: README config example must provide the absolute Windows path with backslashes correctly escaped in JSON.
 - Workflow: Do one task at a time, then stop. Stay inside project folder and ask before installing any dependency not listed in the plan.
 
 ## Known issues
-- What broke: In `src/index.test.ts`, TypeScript raised `TS2339` on `result.content[0].text` because `CallToolResult.content` is a union that includes non-text blocks; resolved by narrowing on `item.type === 'text'`.
+- What broke: Inspector showed incorrect default tool annotations (Destructive true, Open-world true, Read-only false); resolved by adding explicit tool annotations to `registerTool`.
 
 ## Next step
-- Task 5: Manual test with the MCP inspector (`@modelcontextprotocol/inspector`).
+- Task 6: README explaining how to register it in Claude (using absolute Windows path with escaped backslashes).

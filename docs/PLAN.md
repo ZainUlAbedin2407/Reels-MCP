@@ -13,7 +13,7 @@ A checklist of tasks to implement the minimal MCP server.
   - Done when: Automated unit tests verify rejection of limit < 1, capping at total row count, field filtering (`title`, `views`, `style`, `category`), and correct sorting.
 - [x] 4. MCP server wiring
   - Done when: The MCP server is initialized with stdio transport, registers the `get_top_reels` tool with input schema validation, and returns results in standard MCP tool response format.
-- [ ] 5. Manual test with the MCP inspector
+- [x] 5. Manual test with the MCP inspector
   - Done when: Server connects successfully via `@modelcontextprotocol/inspector` and `get_top_reels` responds properly with top reels data.
 - [ ] 6. README explaining how to register it in Claude
   - Requirements: The README config example must use the absolute Windows path of the built entry file, with backslashes escaped correctly in JSON.
