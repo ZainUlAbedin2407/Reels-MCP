@@ -11,7 +11,7 @@ A checklist of tasks to implement the minimal MCP server.
 - [x] 3. Tool function plus a unit test
   - Requirements: `getTopReels(limit)` must reject a limit below 1, cap the limit at the number of rows, and return title, views, style, and category for each reel sorted by views descending (default limit: 5).
   - Done when: Automated unit tests verify rejection of limit < 1, capping at total row count, field filtering (`title`, `views`, `style`, `category`), and correct sorting.
-- [ ] 4. MCP server wiring
+- [x] 4. MCP server wiring
   - Done when: The MCP server is initialized with stdio transport, registers the `get_top_reels` tool with input schema validation, and returns results in standard MCP tool response format.
 - [ ] 5. Manual test with the MCP inspector
   - Done when: Server connects successfully via `@modelcontextprotocol/inspector` and `get_top_reels` responds properly with top reels data.
