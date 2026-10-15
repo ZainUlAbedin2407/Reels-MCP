@@ -1,7 +1,7 @@
 # Project Progress
 
 ## Current task
-Task 5 (Manual test with the MCP inspector) - Completed
+Task 6 (README explaining how to register it in Claude) - Completed
 
 ## Done
 - Created initial planning and configuration files (`AGENTS.md`, `docs/PLAN.md`, `docs/PROGRESS.md`, `.gitignore`, `.antigravityignore`).
@@ -41,6 +41,16 @@ Task 5 (Manual test with the MCP inspector) - Completed
     - `openWorldHint`: `false`
   - Updated test in `src/index.test.ts` to assert that registered tool annotations match these values.
   - Verified with `npm test` (18 passing tests).
+- Task 6:
+  - Authored `README.md` covering:
+    - Project description and overview.
+    - Prerequisites (Node.js 18+/22.x from `package.json`).
+    - Installation, build, and test steps.
+    - Testing via `@modelcontextprotocol/inspector`.
+    - Detailed `get_top_reels` tool documentation (parameters, defaults, error behavior, and annotations).
+    - Claude Desktop registration with Windows configuration path (`%APPDATA%\Claude\claude_desktop_config.json`) and JSON snippet using escaped backslashes for `D:\Zee-Tech\Projects\reels-mcp\dist\index.js`.
+    - Claude Code CLI registration command (`claude mcp add reels-mcp -- node D:\Zee-Tech\Projects\reels-mcp\dist\index.js`), with explicit notes to verify official documentation if paths/commands vary.
+    - Rebuild reminder note: "After any code change, run npm run build again, because Claude runs dist/index.js."
 
 ## Decisions
 - Stack: TypeScript (Node.js) with `@modelcontextprotocol/sdk` over stdio transport.
@@ -56,7 +66,7 @@ Task 5 (Manual test with the MCP inspector) - Completed
 - Workflow: Do one task at a time, then stop. Stay inside project folder and ask before installing any dependency not listed in the plan.
 
 ## Known issues
-- What broke: Inspector showed incorrect default tool annotations (Destructive true, Open-world true, Read-only false); resolved by adding explicit tool annotations to `registerTool`.
+- What broke: None. Documentation created without application code modifications.
 
 ## Next step
-- Task 6: README explaining how to register it in Claude (using absolute Windows path with escaped backslashes).
+- Task 7: Final cleanup (verify repository state, ensure all tests pass cleanly, remove temporary files).
