@@ -5,7 +5,7 @@ A checklist of tasks to implement the minimal MCP server.
 - [x] 1. Init project
   - Requirements: Before installing, list every dependency to add and why. Keep it to TypeScript, Node types, the MCP SDK (and whatever it requires), and one test approach.
   - Done when: Dependencies are reviewed/approved, and `package.json` and `tsconfig.json` are set up with TypeScript, `@modelcontextprotocol/sdk`, dev tooling, and build/run/test scripts.
-- [ ] 2. Load and parse CSV
+- [x] 2. Load and parse CSV
   - Requirements: The CSV parser must handle quoted fields containing commas (e.g. `"Rates itne neeche, sourcing itni oonchi"`), empty likes values (treat as null), and a possible BOM at the start of the file.
   - Done when: A test covers these three cases using real rows from `zeetech_reels.csv` and records are parsed into typed objects with numeric `views`.
 - [ ] 3. Tool function plus a unit test
