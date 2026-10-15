@@ -18,5 +18,5 @@ A checklist of tasks to implement the minimal MCP server.
 - [x] 6. README explaining how to register it in Claude
   - Requirements: The README config example must use the absolute Windows path of the built entry file, with backslashes escaped correctly in JSON.
   - Done when: `README.md` provides clear instructions, prerequisites, build steps, and configuration JSON snippets for Claude Desktop and Claude Code using the properly escaped absolute Windows path.
-- [ ] 7. Final cleanup
+- [x] 7. Final cleanup
   - Done when: Unused files/logs are cleared, type checking and tests pass cleanly, and code adheres to all conventions in `AGENTS.md`.

@@ -1,7 +1,7 @@
 # Project Progress
 
 ## Current task
-Task 6 (README explaining how to register it in Claude) - Completed
+Task 7 (Final cleanup) - Completed
 
 ## Done
 - Created initial planning and configuration files (`AGENTS.md`, `docs/PLAN.md`, `docs/PROGRESS.md`, `.gitignore`, `.antigravityignore`).
@@ -42,15 +42,16 @@ Task 6 (README explaining how to register it in Claude) - Completed
   - Updated test in `src/index.test.ts` to assert that registered tool annotations match these values.
   - Verified with `npm test` (18 passing tests).
 - Task 6:
-  - Authored `README.md` covering:
-    - Project description and overview.
-    - Prerequisites (Node.js 18+/22.x from `package.json`).
-    - Installation, build, and test steps.
-    - Testing via `@modelcontextprotocol/inspector`.
-    - Detailed `get_top_reels` tool documentation (parameters, defaults, error behavior, and annotations).
-    - Claude Desktop registration with Windows configuration path (`%APPDATA%\Claude\claude_desktop_config.json`) and JSON snippet using escaped backslashes for `D:\Zee-Tech\Projects\reels-mcp\dist\index.js`.
-    - Claude Code CLI registration command (`claude mcp add reels-mcp -- node D:\Zee-Tech\Projects\reels-mcp\dist\index.js`), with explicit notes to verify official documentation if paths/commands vary.
-    - Rebuild reminder note: "After any code change, run npm run build again, because Claude runs dist/index.js."
+  - Authored initial `README.md` documenting prerequisites, build, test, Inspector, tool parameters, and registration in Claude.
+- Task 7:
+  - Updated `README.md`:
+    - Inspector section directs users to open the URL printed in the terminal (with note: "Do not share that link, because it contains a token.").
+    - Replaced `$< 1$` with "below 1".
+    - Wrapped Claude Code CLI path argument in double quotes (`"D:\Zee-Tech\Projects\reels-mcp\dist\index.js"`).
+    - Added Troubleshooting section (fully quit Claude Desktop from tray, check `%APPDATA%\Claude\logs`, full path to `node.exe`, and rebuild reminder).
+  - Verified no `console.log` statements in `src/` (only `console.error` on stderr).
+  - Verified repository has no unused files and adheres strictly to `AGENTS.md` conventions.
+  - Re-verified `npm run build` and `npm test` (18 passing tests across 3 suites).
 
 ## Decisions
 - Stack: TypeScript (Node.js) with `@modelcontextprotocol/sdk` over stdio transport.
@@ -66,7 +67,7 @@ Task 6 (README explaining how to register it in Claude) - Completed
 - Workflow: Do one task at a time, then stop. Stay inside project folder and ask before installing any dependency not listed in the plan.
 
 ## Known issues
-- What broke: None. Documentation created without application code modifications.
+- None.
 
 ## Next step
-- Task 7: Final cleanup (verify repository state, ensure all tests pass cleanly, remove temporary files).
+- All checklist tasks complete. Server is fully operational and ready for use.

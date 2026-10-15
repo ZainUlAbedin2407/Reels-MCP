@@ -35,7 +35,7 @@ To test the server interactively using the official MCP Inspector, run:
 ```bash
 npx @modelcontextprotocol/inspector node dist/index.js
 ```
-Open the URL shown in the terminal (usually `http://localhost:5173`) in your browser to inspect available tools and invoke `get_top_reels`.
+Open the URL printed in the terminal in your browser to inspect available tools and invoke `get_top_reels`. Do not share that link, because it contains a token.
 
 ## Tool: `get_top_reels`
 
@@ -45,7 +45,7 @@ Retrieves top-performing reels sorted by views descending, breaking ties by `ree
   - `limit` (*optional, number*): Whole integer of 1 or more specifying how many top reels to return.
 - **Default**: `5` when omitted or undefined.
 - **Output format**: Returns an array of objects containing only `title`, `views`, `style`, and `category`.
-- **Error Behavior**: Rejects non-integers, decimals, strings, `NaN`, and numbers $< 1$ with a descriptive error response (`isError: true` or JSON-RPC schema error `-32602`), ensuring the server never crashes.
+- **Error Behavior**: Rejects non-integers, decimals, strings, `NaN`, and numbers below 1 with a descriptive error response (`isError: true` or JSON-RPC schema error `-32602`), ensuring the server never crashes.
 - **Tool Annotations**: Marked as read-only (`readOnlyHint: true`), non-destructive (`destructiveHint: false`), idempotent (`idempotentHint: true`), and closed-world (`openWorldHint: false`).
 
 ## Registering in Claude
@@ -79,7 +79,14 @@ Retrieves top-performing reels sorted by views descending, breaking ties by `ree
 
 To add the MCP server in Claude Code CLI, run:
 ```bash
-claude mcp add reels-mcp -- node D:\Zee-Tech\Projects\reels-mcp\dist\index.js
+claude mcp add reels-mcp -- node "D:\Zee-Tech\Projects\reels-mcp\dist\index.js"
 ```
 
 *(Note: CLI flags and options may vary depending on the Claude Code version. If this command does not match your version, verify the current syntax with `claude mcp --help` or refer to the official Claude Code documentation).*
+
+## Troubleshooting
+
+- **Restart Claude Desktop**: Fully quit Claude Desktop from the system tray (notification area) and reopen it after editing the config.
+- **Check Logs**: Check `%APPDATA%\Claude\logs` if the server fails to connect.
+- **Node Path**: If `node` is not found, use the full path to `node.exe` (e.g. `"C:\\Program Files\\nodejs\\node.exe"`).
+- **Rebuild after edits**: Run `npm run build` after any code change, because Claude runs `dist/index.js`.
