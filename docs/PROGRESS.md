@@ -52,6 +52,7 @@ Task 7 (Final cleanup) - Completed
   - Verified no `console.log` statements in `src/` (only `console.error` on stderr).
   - Verified repository has no unused files and adheres strictly to `AGENTS.md` conventions.
   - Re-verified `npm run build` and `npm test` (18 passing tests across 3 suites).
+- Pushed the project to GitHub (https://github.com/ZainUlAbedin2407/Reels-MCP.git).
 
 ## Decisions
 - Stack: TypeScript (Node.js) with `@modelcontextprotocol/sdk` over stdio transport.
